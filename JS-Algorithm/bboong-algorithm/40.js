@@ -18,3 +18,39 @@
 
 // 출력
 // 2
+
+function solution(n) {
+  let arr = n.split("/n").map((item) => +item);
+  let limit = arr[0]; // 50
+  let friends = arr[1]; // 5
+
+  for (i = 2; i < arr.length; i++) {
+    let answer = 0;
+    let testArr = [];
+    answer += arr[i];
+    testArr = arr[i];
+    if (answer > 50) {
+      return false;
+    } else {
+      return answer.length;
+    }
+  }
+  //
+}
+
+// 답안
+let total = 0;
+let count = 0;
+const limit = prompt("제한 무게를 입력하세요.");
+const n = prompt("인원수를 입력하세요.");
+
+for (let i = 1; i <= n; i++) {
+  total += parseInt(prompt("무게를 입력해주세요."), 10);
+  if (total <= limit) {
+    count = i;
+  }
+}
+
+console.log(count);
+
+// count가 필요하니 해당 변수를 선언하면 되는 것이어따..
