@@ -4,6 +4,8 @@ let input = fs.readFileSync(filePath).toString().split("\n");
 
 let currentTime = input[0].split(" ").map((item) => +item);
 let cookingTime = +input[1];
+console.log(currentTime);
+console.log(cookingTime);
 
 currentTime[1] += cookingTime;
 
