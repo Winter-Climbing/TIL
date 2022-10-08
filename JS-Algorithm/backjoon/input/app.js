@@ -4,6 +4,7 @@ let input = fs.readFileSync(filePath).toString().split("\n");
 console.log(input);
 input = input[0];
 input = input.split(" ").map((item) => +item);
+console.log(input);
 
 solution(input[0], input[1]);
 

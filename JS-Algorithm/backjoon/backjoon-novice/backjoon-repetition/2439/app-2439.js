@@ -2,13 +2,14 @@ const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
 let input = fs.readFileSync(filePath).toString();
 
-let numbers = +input;
+let num = +input;
 
-let star = "";
-for (let i = 0; i < numbers; i++) {
-  for (let j = 0; j <= i; j++) {
-    star += "*";
+for (let i = 0; i < num; i++) {
+  let star = "";
+
+  for (let j = num - 1; j >= 0; j--) {
+    star += j <= i ? "*" : " ";
   }
-  star += "\n";
+
+  console.log(star);
 }
-console.log(star);
