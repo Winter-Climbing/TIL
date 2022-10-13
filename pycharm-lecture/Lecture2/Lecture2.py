@@ -181,3 +181,7 @@ print(나눔.split())
 나눔2 = 'javascript:is:very:strange'
 print(나눔2.split(':'))
 
+u = [5,1,12,5,6,21]
+u.sort()
+u.reverse()
+print(u)
