@@ -7,12 +7,13 @@ function countUniqueValues(arr) {
   for (i = 1; (i = arr.length); i++) {
     let first = arr[0];
     let second = arr[i];
-    // 중복된 숫자를 발견하면
+    // 숫자가 중복되지 않았다면 배열 answer에 push하고 second의 값이 first가 된다.
     if (first !== second) {
       answer.push(second);
       first = second;
     }
   }
+  // 개수는 결국 배열 answer의 length다.
   return answer.length;
 }
 

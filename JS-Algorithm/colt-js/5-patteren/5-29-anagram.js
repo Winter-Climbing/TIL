@@ -1,4 +1,5 @@
 function validAnagram(first, second) {
+  // 사이즈가 다르면 일단 false부터 박고 시작하자
   if (first.length !== second.length) {
     return false;
   }
