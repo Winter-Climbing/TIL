@@ -8,6 +8,7 @@ function linearSearch(array, num) {
   return -1;
 }
 
-return array.forEach(element, (idx) => (element === num ? array.idx : -1));
+// 이렇게 줄일 수도 있다.
+// return array.forEach(element, (idx) => (element === num ? array.idx : -1));
 
 console.log(linearSearch([10, 15, 20, 25, 30], 30));
