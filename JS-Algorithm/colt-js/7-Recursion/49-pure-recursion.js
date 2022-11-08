@@ -1,5 +1,5 @@
 // 순수 재귀함수다
-// 48의 홀수 문제를 순수 재귀함수로 작성해보자!!
+// dragon - 홀수 문제를 순수 재귀함수로 작성해보자!!
 
 function collectOddValues(arr) {
   let newArr = [];

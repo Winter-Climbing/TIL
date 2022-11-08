@@ -37,6 +37,7 @@ function maxSubarraySum(arr, num) {
   let tempSum = 0;
   // 주어진 숫자보다 배열의 길이가 짧으면 판단 의미가 없으니 null!
   if (arr.length < num) return null;
+
   // 일단 먼저 주어진 num 전까지의 합을 maxSum에 저장
   for (let i = 0; i < num; i++) {
     maxSum += arr[i];
