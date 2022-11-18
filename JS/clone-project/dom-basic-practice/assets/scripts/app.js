@@ -9,11 +9,12 @@ const startAddMovieButton = document.querySelector(".myBtn");
 
 // const cancelAddMovieButton = document.querySelector(".btn--passive");
 const cancelAddMovieButton = addMovieModal.querySelector(".btn--passive"); // 조상인 addMovieModal이 변수로 선언되었는데 굳이 document 전체를 탐색할 필요가 없다.
-const submitAddMovieButton = addMovieModal.querySelector(".btn--success");
+const confirmAddMovieButton = addMovieModal.querySelector(".btn--success");
 
 const userInputs = addMovieModal.querySelectorAll("input");
 
 const entryTextSection = document.getElementById("entry-text");
+const deleteMovieModal = document.getElementById("delete-modal");
 
 const movies = [];
 
@@ -25,7 +26,7 @@ const updateUI = () => {
   }
 };
 
-const deleteMovieHandler = (movieId) => {
+const deleteMovie = (movieId) => {
   let movieIndex = 0;
   for (const movie of movies) {
     if (movie.id === movieId) {
@@ -36,6 +37,18 @@ const deleteMovieHandler = (movieId) => {
   movies.splice(movieIndex, 1);
   const listRoot = document.getElementById("movie-list");
   listRoot.children[movieIndex].remove();
+  // listRoot.removeChild(listRoot.children[movieIndex]);
+};
+
+const closeMovieDeletionModal = () => {
+  toggleBackdrop();
+  deleteMovieModal.classList.remove("visible");
+};
+
+const deleteMovieHandler = (movieId) => {
+  deleteMovieModal.classList.add("visible");
+  toggleBackdrop();
+  // deleteMovie(movieId);
 };
 
 const renderNewMovieElement = (id, title, imageUrl, rating) => {
@@ -43,75 +56,69 @@ const renderNewMovieElement = (id, title, imageUrl, rating) => {
   newMovieElement.className = "movie-element";
   newMovieElement.innerHTML = `
     <div class="movie-element__image">
-      <img src="${imageUrl}" alt="${title}"/>
+      <img src="${imageUrl}" alt="${title}">
     </div>
     <div class="movie-element__info">
       <h2>${title}</h2>
       <p>${rating}/5 stars</p>
     </div>
   `;
-
   newMovieElement.addEventListener("click", deleteMovieHandler.bind(null, id));
-
   const listRoot = document.getElementById("movie-list");
   listRoot.append(newMovieElement);
 };
 
-const toggleAddMovie = () => {
-  addMovieModal.classList.toggle("visible");
-};
-
 const toggleBackdrop = () => {
-  changeBackground.classList.toggle("visible");
+  backdrop.classList.toggle("visible");
 };
 
-const toggleMovieModal = () => {
-  toggleAddMovie();
+const closeMovieModal = () => {
+  addMovieModal.classList.remove("visible");
+};
+
+const showMovieModal = () => {
+  // function() {}
+  addMovieModal.classList.add("visible");
   toggleBackdrop();
-  clearMovieInput();
-};
-
-const backdropClickHandler = (e) => {
-  if (e.target === changeBackground) {
-    toggleAddMovie();
-    toggleBackdrop();
-  }
 };
 
 const clearMovieInput = () => {
-  for (const usrInputs of userInputs) {
-    usrInputs.value = "";
+  for (const usrInput of userInputs) {
+    usrInput.value = "";
   }
 };
 
-const addMovieHandler = (e) => {
+const cancelAddMovieHandler = () => {
+  closeMovieModal();
+  clearMovieInput();
+};
+
+const addMovieHandler = () => {
   const titleValue = userInputs[0].value;
-  const imgUrlValue = userInputs[1].value;
+  const imageUrlValue = userInputs[1].value;
   const ratingValue = userInputs[2].value;
 
-  // trim을 통해 의도하지 않은 공백을 제거한다.
   if (
     titleValue.trim() === "" ||
-    imgUrlValue.trim() === "" ||
+    imageUrlValue.trim() === "" ||
     ratingValue.trim() === "" ||
     +ratingValue < 1 ||
     +ratingValue > 5
   ) {
-    alert("Please enter valid value (빈값 없이 1과 5사이로 쓰셈!)");
+    alert("Please enter valid values (rating between 1 and 5).");
     return;
   }
 
   const newMovie = {
-    // 원래 math.random은 똑같은 숫자가 나올 수 있기 때문에 선택 대상이 아니다.
     id: Math.random().toString(),
     title: titleValue,
-    image: imgUrlValue,
+    image: imageUrlValue,
     rating: ratingValue,
   };
 
   movies.push(newMovie);
   console.log(movies);
-  toggleAddMovie();
+  closeMovieModal();
   toggleBackdrop();
   clearMovieInput();
   renderNewMovieElement(
@@ -123,7 +130,12 @@ const addMovieHandler = (e) => {
   updateUI();
 };
 
-startAddMovieButton.addEventListener("click", toggleMovieModal);
-cancelAddMovieButton.addEventListener("click", toggleMovieModal);
-changeBackground.addEventListener("click", backdropClickHandler);
-submitAddMovieButton.addEventListener("click", addMovieHandler);
+const backdropClickHandler = () => {
+  closeMovieModal();
+  closeMovieDeletionModal();
+};
+
+startAddMovieButton.addEventListener("click", showMovieModal);
+backdrop.addEventListener("click", backdropClickHandler);
+cancelAddMovieButton.addEventListener("click", cancelAddMovieHandler);
+confirmAddMovieButton.addEventListener("click", addMovieHandler);
