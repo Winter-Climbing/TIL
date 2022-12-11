@@ -41,13 +41,11 @@ function getElement() {
 // 임시변수를 선언하는 순간, 임시변수에 접근해서 CRUD를 하고 싶다는 욕망을 억제하기 힘들다.
 // 그래서 그냥 이렇게 객체만 반환함으로써 사이드 이펙트를 최소화시켰다.
 function getElement() {
-  const result = {
-    return {
-      title = document.querySelector(".title")
-      text = document.querySelector(".text")
-      value = document.querySelector(".value")
-    }
-  }
+  return {
+    title: document.querySelector(".title"),
+    text: document.querySelector(".text"),
+    value: document.querySelector(".value"),
+  };
 }
 
 //
@@ -84,13 +82,13 @@ function getDateTime(targetDate) {
 
 // 그렇게 되면 여러 로직(여기서는 '분 전'이라는 글을 덧 붙이는 로직)을 추가하더라도 간단하게 추상화 시켜 작성할 수 있다.
 function getDateTimeAddText() {
-  const currentDateTime = getDateTime(new Date())
+  const currentDateTime = getDateTime(new Date());
 
   return {
-    month: currentDateTime.month + ' 분 전',
-    day: currentDateTime.day + ' 분 전',
-    hour:currentDateTime.hour + ' 분 전'
-  }
+    month: currentDateTime.month + " 분 전",
+    day: currentDateTime.day + " 분 전",
+    hour: currentDateTime.hour + " 분 전",
+  };
 }
 ```
 
