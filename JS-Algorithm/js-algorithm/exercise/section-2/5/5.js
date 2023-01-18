@@ -22,15 +22,15 @@ let input = fs
   .split(" ")
   .map((i) => +i);
 
-function solution(arr) {
-  let array = [];
-  let align = arr.sort((a, b) => b - a);
-
-  for (let val of arr) {
-    array = align.filter((value, idx) => value === val && idx);
+function solution(length, arr) {
+  let answer = Array.from({ length }, () => 1);
+  for (let i = 0; i <= arr.length; i++) {
+    for (let j = 0; j <= arr.length; j++) {
+      if (arr[i] < arr[j]) answer[i]++;
+    }
   }
 
-  return array;
+  return answer;
 }
 
-console.log(solution(input));
+console.log(solution(5, input));
