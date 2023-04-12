@@ -3,22 +3,22 @@ const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 let input = fs.readFileSync(filePath).toString().split('\n');
 
 let n = Number(input[0]);
-const data = [];
+let data = [];
 for (let i = 1; i <= n; i++) {
-  const [x, y] = input[i].split(' ').map(Number);
+  let [x, y] = input[i].split(' ').map(Number);
   data.push([x, y]);
 }
 
-const sorting = (a, b) => {
+function compare(a, b) {
   if (a[0] != b[0]) return a[0] - b[0];
-  return a[1] - b[1];
-};
+  else return a[1] - b[1];
+}
 
-data.sort(sorting);
+data.sort(compare);
 
 let answer = '';
-for (let i of data) {
-  answer += i[0] + ' ' + i[1] + '\n';
+for (let point of data) {
+  answer += point[0] + ' ' + point[1] + '\n';
 }
 
 console.log(answer);
