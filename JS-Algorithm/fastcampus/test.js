@@ -1,24 +1,21 @@
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-let input = fs.readFileSync(filePath).toString().split('\n');
+let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
-let n = Number(input[0]);
-const data = [];
-for (let i = 1; i <= n; i++) {
-  const [x, y] = input[i].split(' ').map(Number);
-  data.push([x, y]);
-}
+const arr = input.join('').split('-');
 
-const sorting = (a, b) => {
-  if (a[0] != b[0]) return a[0] - b[0];
-  return a[1] - b[1];
-};
+let answer = 0;
 
-data.sort(sorting);
-
-let answer = '';
-for (let i of data) {
-  answer += i[0] + ' ' + i[1] + '\n';
+for (let i = 0; i < arr.length; i++) {
+  let plusArr = arr[i]
+    .split('+')
+    .map(Number)
+    .reduce((a, b) => a + b);
+  if (i === 0) {
+    answer = Number(arr[0]);
+  } else {
+    answer -= plusArr;
+  }
 }
 
 console.log(answer);

@@ -4,6 +4,7 @@ let input = fs.readFileSync(filePath).toString().trim().split('\n');
 
 let value = Number(input[0].split(' ')[1]);
 
+// sort 메서드로 내림차순 정렬
 const coin = input
   .map(Number)
   .filter((i) => value >= i)
